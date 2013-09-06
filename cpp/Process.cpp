@@ -4,24 +4,26 @@
 JNIEXPORT void JNICALL Java_demopkg_Process_nativeLongOperation
   (JNIEnv *env, jobject owner, jobject param1)
 {
-	jclass cls = env->GetObjectClass(param1);
-	jmethodID mid = env->GetMethodID(cls, "OnPercent", "(I)V");
-	for (int i=1; i<=10; i++)
-		env->CallVoidMethod(param1, mid, i);
-	mid = env->GetMethodID(cls, "OnPercentEx", "(Ldemopkg/CmplxStruct;)V");
-	jclass clazz = env->FindClass("demopkg/CmplxStruct");
-	jobject obj = env->AllocObject(clazz);
-	jfieldID fld = env->GetFieldID(clazz, "fieldI","I");
-	env->SetIntField(obj, fld, 3);
-	fld = env->GetFieldID(clazz, "arr","[B");
-	jbyteArray byteArray = env->NewByteArray(5);
-	jbyte bytes[5];
-	env->GetByteArrayRegion(byteArray, 0, 5, bytes);
-	bytes[3] = 3;
-    bytes[4] = 4;
-	env->SetByteArrayRegion(byteArray, 0, 5, bytes);
-    env->SetObjectField(obj, fld, byteArray);
-	fld = env->GetFieldID(clazz, "str","Ljava/lang/String;");
-	env->SetObjectField(obj, fld,  env->NewStringUTF("abc"));
-	env->CallVoidMethod(param1, mid, obj);
+	jclass clsICallback = env->GetObjectClass(param1);
+	jmethodID method1 = env->GetMethodID(clsICallback, "onPercent", "(I)V");
+	jmethodID method2 = env->GetMethodID(clsICallback, "onPercentEx", "(Ldemopkg/ComplexStruct;)V");
+	jclass clsComplexStruct = env->FindClass("demopkg/ComplexStruct");
+
+	char str[32];
+	jbyte bytes[10];
+	for (int i=1; i<=10; i++) bytes[i-1] = i;
+	for (int i=1; i<=10; i++) {
+		env->CallVoidMethod(param1, method1, i);
+		jobject obj = env->AllocObject(clsComplexStruct);
+		jfieldID fld = env->GetFieldID(clsComplexStruct, "fieldI","I");
+		env->SetIntField(obj, fld, i);
+		fld = env->GetFieldID(clsComplexStruct, "arr","[B");
+		jbyteArray byteArray = env->NewByteArray(i);
+		env->SetByteArrayRegion(byteArray, 0, i, bytes);
+		env->SetObjectField(obj, fld, byteArray);
+		fld = env->GetFieldID(clsComplexStruct, "str","Ljava/lang/String;");
+		sprintf(str,"a%d", i);
+		env->SetObjectField(obj, fld,  env->NewStringUTF(str));
+		env->CallVoidMethod(param1, method2, obj);
+	}
 }

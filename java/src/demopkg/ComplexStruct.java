@@ -1,5 +1,5 @@
 package demopkg;
-public class CmplxStruct {
+public class ComplexStruct {
 	int fieldI;
 	byte[] arr;
 	String str;

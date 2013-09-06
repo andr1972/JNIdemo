@@ -2,12 +2,16 @@ package demopkg;
 public class CallbackImpl implements ICallback {
 
 	@Override
-	public void OnPercent(int percent) {
+	public void onPercent(int percent) {
 		System.out.printf("%d\n", percent);
 	}
 
 	@Override
-	public void OnPercentEx(CmplxStruct cs) {
-		System.out.printf("ex: int=%d str=%s\n", cs.fieldI, cs.str);
+	public void onPercentEx(ComplexStruct cs) {
+		int sum = 0;
+		for (int i=0; i<cs.arr.length; i++) 
+			sum+=cs.arr[i];
+		System.out.printf("ex: int=%d str=%s sum=%d\n",
+				cs.fieldI, cs.str, sum);
 	}
 }
