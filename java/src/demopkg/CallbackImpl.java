@@ -11,6 +11,8 @@ public class CallbackImpl implements ICallback {
 		int sum = 0;
 		for (int i=0; i<cs.arr.length; i++) 
 			sum+=cs.arr[i];
+		if (cs.prior!=null)
+			System.out.printf("(%d) ",cs.prior.fieldI);
 		System.out.printf("ex: int=%d str=%s sum=%d\n",
 				cs.fieldI, cs.str, sum);
 	}

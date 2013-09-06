@@ -3,4 +3,5 @@ public class ComplexStruct {
 	int fieldI;
 	byte[] arr;
 	String str;
+	ComplexStruct prior;
 }

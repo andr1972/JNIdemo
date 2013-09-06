@@ -9,9 +9,10 @@ JNIEXPORT void JNICALL Java_demopkg_Process_nativeLongOperation
 	jmethodID method2 = env->GetMethodID(clsICallback, "onPercentEx", "(Ldemopkg/ComplexStruct;)V");
 	jclass clsComplexStruct = env->FindClass("demopkg/ComplexStruct");
 
-	char str[32];
 	jbyte bytes[10];
 	for (int i=1; i<=10; i++) bytes[i-1] = i;
+	char str[32];
+	jobject priorObj = NULL;
 	for (int i=1; i<=10; i++) {
 		env->CallVoidMethod(param1, method1, i);
 		jobject obj = env->AllocObject(clsComplexStruct);
@@ -23,7 +24,11 @@ JNIEXPORT void JNICALL Java_demopkg_Process_nativeLongOperation
 		env->SetObjectField(obj, fld, byteArray);
 		fld = env->GetFieldID(clsComplexStruct, "str","Ljava/lang/String;");
 		sprintf(str,"a%d", i);
-		env->SetObjectField(obj, fld,  env->NewStringUTF(str));
+		env->SetObjectField(obj, fld,  env->NewStringUTF(str));		
+		fld = env->GetFieldID(clsComplexStruct, "prior","Ldemopkg/ComplexStruct;");
+		env->SetObjectField(obj, fld, priorObj);
+
 		env->CallVoidMethod(param1, method2, obj);
+		priorObj = obj;
 	}
 }
