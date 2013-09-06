@@ -11,7 +11,7 @@ JNIEXPORT void JNICALL Java_demopkg_Process_nativeLongOperation
         return; 
     } else printf("1. found method!\n");
 	//env->CallVoidMethod(owner, mid);//error
-	for (int i=1; i<=100; i++)
+	for (int i=1; i<=10; i++)
 		env->CallVoidMethod(param1, mid, i);//ok
 	mid = env->GetMethodID(cls, "OnPercentEx", "(Ldemopkg/CmplxStruct;)V");
     if (mid == NULL) {
@@ -24,5 +24,7 @@ JNIEXPORT void JNICALL Java_demopkg_Process_nativeLongOperation
 		printf("2. can't alloc..\n");
         return; 
     } else printf("2. alloc ok!\n");
+	jfieldID fld = env->GetFieldID(clazz, "fieldI","I");
+	env->SetIntField(obj, fld, 3);
 	env->CallVoidMethod(param1, mid, obj);
 }
