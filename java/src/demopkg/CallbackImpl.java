@@ -1,3 +1,4 @@
+package demopkg;
 public class CallbackImpl implements ICallback {
 
 	@Override

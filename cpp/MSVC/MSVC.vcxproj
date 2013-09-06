@@ -77,10 +77,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Process.h" />
+    <ClCompile Include="..\Process.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Process.cpp" />
+    <ClInclude Include="..\demopkg_Process.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

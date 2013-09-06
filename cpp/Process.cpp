@@ -1,7 +1,7 @@
 #include <jni.h>
-#include "Process.h"
+#include "demopkg_Process.h"
 
-JNIEXPORT void JNICALL Java_Process_nativeLongOperation
+JNIEXPORT void JNICALL Java_demopkg_Process_nativeLongOperation
   (JNIEnv *env, jobject owner, jobject param1)
 {
 	jclass cls = env->GetObjectClass(param1);
@@ -13,12 +13,12 @@ JNIEXPORT void JNICALL Java_Process_nativeLongOperation
 	//env->CallVoidMethod(owner, mid);//error
 	for (int i=1; i<=100; i++)
 		env->CallVoidMethod(param1, mid, i);//ok
-	mid = env->GetMethodID(cls, "OnPercentEx", "(LCmplxStruct;)V");
+	mid = env->GetMethodID(cls, "OnPercentEx", "(Ldemopkg/CmplxStruct;)V");
     if (mid == NULL) {
 		printf("2. not found method..\n");
         return; 
     } else printf("2. found method!\n");
-	jclass clazz = env->FindClass("CmplxStruct");
+	jclass clazz = env->FindClass("demopkg/CmplxStruct");
 	jobject obj = env->AllocObject(clazz);
 	if (obj == NULL) {
 		printf("2. can't alloc..\n");
