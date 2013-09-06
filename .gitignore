@@ -1,1 +1,5 @@
-/bin
+*.dll
+*.exp
+*.ilk
+*.lib
+*.pdb
