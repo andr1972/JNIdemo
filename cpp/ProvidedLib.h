@@ -3,11 +3,6 @@
 struct sCallbackProgressStruc;
 typedef struct sCallbackProgressStruc tCallbackProgressStruc, *pCallbackProgressStruc; 
 
-typedef struct sOtherCallbackProgressStruc
-        {
-          int aaa;
-        } tOtherCallbackProgressStruc,
-         *pOtherCallbackProgressStruc;
 typedef struct sGlobalDataStruc
         {
           void  *Obj;           // ---- reserved for application! ----

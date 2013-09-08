@@ -1,5 +1,8 @@
 /* Imagine that this file is part of provided library which has no sources and we can't
-   change. This library uses callbacks as pointer to function */
+   change. This library uses callbacks as pointer to function.
+   Happily, struct sGlobalDataStruc has void  *Obj user defined pointer which can be used
+   to store JNI objects, otherwise it must be global*/
+
 #include <string.h>
 #include "ProvidedLib.h"
 
