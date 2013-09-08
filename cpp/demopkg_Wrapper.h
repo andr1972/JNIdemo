@@ -18,10 +18,10 @@ JNIEXPORT jint JNICALL Java_demopkg_Wrapper_nativeInitDll
 /*
  * Class:     demopkg_Wrapper
  * Method:    nativeExtract
- * Signature: ()V
+ * Signature: (Ldemopkg/ICallback;)V
  */
 JNIEXPORT void JNICALL Java_demopkg_Wrapper_nativeExtract
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jobject);
 
 #ifdef __cplusplus
 }

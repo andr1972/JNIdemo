@@ -84,7 +84,6 @@
   <ItemGroup>
     <ClInclude Include="..\cpp\demopkg_Wrapper.h" />
     <ClInclude Include="..\cpp\ProvidedLib.h" />
-    <ClInclude Include="..\cpp\Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\cpp\ProvidedLib.cpp" />

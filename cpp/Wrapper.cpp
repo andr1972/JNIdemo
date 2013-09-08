@@ -3,10 +3,18 @@
 #include "ProvidedLib.h"
 #include "demopkg_Wrapper.h"
 
+struct sJNIstate
+        {
+          JNIEnv *env;
+		  jobject interf;
+          jmethodID method;
+        };
+
+struct sJNIstate jniState;
+
 int __stdcall StateProc(pCallbackProgressStruc State)
 {   
-	printf("from C callback size=%d\n",State->ProgressData->TotalProcessedSize);
-	return 0;
+	return jniState.env->CallIntMethod(jniState.interf, jniState.method);		
 }
 
 
@@ -20,8 +28,13 @@ JNIEXPORT jint JNICALL Java_demopkg_Wrapper_nativeInitDll
 }
 
 JNIEXPORT void JNICALL Java_demopkg_Wrapper_nativeExtract
-  (JNIEnv *, jobject)
+  (JNIEnv *env, jobject owner, jobject interf)
 {
 tExtractStruc ExtractStr;
+    
+    jniState.env = env;
+	jniState.interf = interf;
+	jclass clsInterf = env->GetObjectClass(interf);
+	jniState.method = env->GetMethodID(clsInterf, "stateProc", "()V");
 	Extract("",&ExtractStr);
 }
