@@ -1,5 +1,6 @@
 package demopkg;
 
 public interface ICallback {
-	void stateProc();
+	int stateProc(ProgressDataStruc state);
+	int stateProc(long TotalProcessedSize,	long TotalSize);
 }

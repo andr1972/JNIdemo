@@ -7,14 +7,17 @@ struct sJNIstate
         {
           JNIEnv *env;
 		  jobject interf;
-          jmethodID method;
+          jmethodID methodstateProc1;
+		  jmethodID methodstateProc2;
         };
 
 struct sJNIstate jniState;
 
 int __stdcall StateProc(pCallbackProgressStruc State)
 {   
-	return jniState.env->CallIntMethod(jniState.interf, jniState.method);		
+	//jniState.env->CallIntMethod(jniState.interf, jniState.methodstateProc1);
+	return jniState.env->CallIntMethod(jniState.interf, jniState.methodstateProc2, 
+		(long long)State->ProgressData->TotalProcessedSize, (long long)State->ProgressData->TotalSize);
 }
 
 
@@ -35,6 +38,7 @@ tExtractStruc ExtractStr;
     jniState.env = env;
 	jniState.interf = interf;
 	jclass clsInterf = env->GetObjectClass(interf);
-	jniState.method = env->GetMethodID(clsInterf, "stateProc", "()V");
+	jniState.methodstateProc1 = env->GetMethodID(clsInterf, "stateProc", "(Ldemopkg/ProgressDataStruc;)I");
+	jniState.methodstateProc2 = env->GetMethodID(clsInterf, "stateProc", "(JJ)I");
 	Extract("",&ExtractStr);
 }
