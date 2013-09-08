@@ -1,10 +1,16 @@
 #include <jni.h>
 #include "demopkg_Process.h"
+#include "ProvidedLib.h"
+#include "Wrapper.h"
 
 JNIEXPORT void JNICALL Java_demopkg_Process_nativeLongOperation
   (JNIEnv *env, jobject owner, jobject param1)
 {
-	jclass clsICallback = env->GetObjectClass(param1);
+	tExtractStruc ExtractStr;
+	CallInitDll();
+	Extract("",&ExtractStr);
+
+/*	jclass clsICallback = env->GetObjectClass(param1);
 	jmethodID method1 = env->GetMethodID(clsICallback, "onPercent", "(I)V");
 	jmethodID method2 = env->GetMethodID(clsICallback, "onPercentEx", "(Ldemopkg/ComplexStruct;)V");
 	jclass clsComplexStruct = env->FindClass("demopkg/ComplexStruct");
@@ -30,5 +36,5 @@ JNIEXPORT void JNICALL Java_demopkg_Process_nativeLongOperation
 
 		env->CallVoidMethod(param1, method2, obj);
 		priorObj = obj;
-	}
+	}*/
 }
