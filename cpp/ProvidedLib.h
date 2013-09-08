@@ -1,5 +1,13 @@
 //inspired by UnACEv2.dll, see http://www.winace.com/, https://sourceforge.net/projects/junace/        
 
+struct sCallbackProgressStruc;
+typedef struct sCallbackProgressStruc tCallbackProgressStruc, *pCallbackProgressStruc; 
+
+typedef struct sOtherCallbackProgressStruc
+        {
+          int aaa;
+        } tOtherCallbackProgressStruc,
+         *pOtherCallbackProgressStruc;
 typedef struct sGlobalDataStruc
         {
           void  *Obj;           // ---- reserved for application! ----
@@ -11,7 +19,7 @@ typedef struct sGlobalDataStruc
                                 // InitDll()
 
           int (__stdcall *StateCallbackProc)
-                           (/*pCallbackProgressStruc State*/void);
+                           (pCallbackProgressStruc State);
                                 //  Called to let the application know about
                                 //  the progress of operations.
         } tGlobalDataStruc,

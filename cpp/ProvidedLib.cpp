@@ -17,9 +17,11 @@ tProgressDataStruc progressData;
 tCallbackProgressStruc callbackProgress;
 
     callbackProgress.GlobalData = &globalData;
-	progressData.TotalProcessedSize = 100;
-    progressData.TotalSize = 100;
 	callbackProgress.ProgressData = &progressData;
-	globalData.StateCallbackProc(/*&callbackProgress*/);
+	progressData.TotalSize = 100;
+	for (int i=1; i<=10; i++) {
+		progressData.TotalProcessedSize = i*10;
+		globalData.StateCallbackProc(&callbackProgress);
+	}
 	return 0;
 }
