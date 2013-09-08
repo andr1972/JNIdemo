@@ -82,12 +82,11 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\cpp\demopkg_Process.h" />
+    <ClInclude Include="..\cpp\demopkg_Wrapper.h" />
     <ClInclude Include="..\cpp\ProvidedLib.h" />
     <ClInclude Include="..\cpp\Wrapper.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\cpp\Process.cpp" />
     <ClCompile Include="..\cpp\ProvidedLib.cpp" />
     <ClCompile Include="..\cpp\Wrapper.cpp" />
   </ItemGroup>

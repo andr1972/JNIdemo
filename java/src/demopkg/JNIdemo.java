@@ -12,7 +12,9 @@ public class JNIdemo {
 	}
 
 	public static void main(String[] args) {
-		Process process = new Process();
-		process.nativeLongOperation(new CallbackImpl());
+		Wrapper wrapper = new Wrapper();
+		wrapper.nativeInitDll();
+		wrapper.nativeExtract();
+		//(new CallbackImpl());
 	}
 }
